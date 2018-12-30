@@ -8,7 +8,8 @@
     "sourceMap": true,
     "strict": true,
     "declaration": false,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "esModuleInterop": true
   },
   "include": [
     "src/scripts/index.tsx"

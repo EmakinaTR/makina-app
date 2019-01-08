@@ -150,4 +150,5 @@ $RECYCLE.BIN/
 
 # End of https://www.gitignore.io/api/node,macos,windows,visualstudiocode
 
-*-lock.json
+package-lock.json
+yarn.lock

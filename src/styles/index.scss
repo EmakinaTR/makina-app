@@ -1,1 +1,33 @@
-@import '~typeface-roboto/index.css';
+@import '~antd/dist/antd.min.css';
+
+.light-text {
+  color: #ffffff;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.app-logo {
+  height: 32px;
+  margin: 16px;
+}
+
+.app-logo h2 {
+  @extend .light-text;
+  text-align: center;
+}
+
+.app-drawer-trigger {
+  @extend .light-text;
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color .3s;
+}
+
+.app-drawer-trigger:hover {
+  color: #1890ff;
+}

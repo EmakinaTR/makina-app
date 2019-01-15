@@ -16,7 +16,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "apache-2.0",
   "dependencies": {
     "antd": "^3.12.1",
     "lodash": "^4.17.11",

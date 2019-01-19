@@ -19,10 +19,10 @@
   "license": "apache-2.0",
   "dependencies": {
     "antd": "^3.12.1",
+    "flexboxgrid": "^6.3.1",
     "lodash": "^4.17.11",
     "react": "16.8.0-alpha.0",
     "react-dom": "16.8.0-alpha.0",
-    "react-flexbox-grid": "^2.1.2",
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {

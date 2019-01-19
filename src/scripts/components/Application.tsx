@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { Layout, Menu, Icon, Avatar, Dropdown } from 'antd'
-import { Row, Col } from 'react-flexbox-grid'
 
 export default function Application () {
   const [ drawerOpen, setDrawerOpen ] = React.useState(true)
@@ -54,30 +53,32 @@ export default function Application () {
       </Layout.Sider>
       <Layout>
         <Layout.Header style={{ padding: 0 }}>
-          <Row between='xs'>
-            <Col xs={2}>
-              <Icon
-                className='app-drawer-trigger'
-                type={drawerOpen ? 'menu-fold' : 'menu-unfold'}
-                onClick={toggleDrawer}
-              />
-            </Col>
-            <Col xs={2} />
-            <Col xs={2}>
-              <Row end='xs'>
-                <Col xs={12}>
+          <div className='row between-xs'>
+            <div className='col-xs-2'>
+              <div className='box'>
+                <Icon
+                  className='app-drawer-trigger'
+                  type={drawerOpen ? 'menu-fold' : 'menu-unfold'}
+                  onClick={toggleDrawer}
+                />
+              </div>
+            </div>
+            <div className='col-xs-2'>
+              <div className='box' />
+            </div>
+            <div className='col-xs-2'>
+              <div className='row end-xs'>
+                <div className='col-cs-12'>
                   <Dropdown overlay={avatarMenu} placement='bottomRight'>
                     <div style={{ marginRight: '1em' }}>
                       <Avatar icon='user' />
                       <span className='light-text' style={{ margin: '0.5em' }}>Jane Doe</span>
                     </div>
                   </Dropdown>
-
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-
+                </div>
+              </div>
+            </div>
+          </div>
         </Layout.Header>
         <Layout.Content style={{
           margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280

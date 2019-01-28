@@ -1,7 +1,7 @@
 import * as faker from 'faker'
 import { Place } from '../models/Place'
 import { Organization } from '../models/Organization'
-import { DataService } from './DataService'
+import { DataService } from './DataService' // eslint-disable-line no-unused-vars
 
 /**
  * Organization Service with mock data from faker

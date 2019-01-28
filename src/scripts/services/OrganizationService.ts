@@ -41,6 +41,10 @@ class OrganizationService implements DataService<Organization> {
 
   public update (organization: Organization): Organization {
     const idx = this.organizations.findIndex(p => p.id === organization.id)
+    if (idx < 0) {
+      throw new Error('Profile not found')
+    }
+
     organization.updatedAt = new Date()
     this.organizations[idx] = organization
     return organization
@@ -52,9 +56,11 @@ class OrganizationService implements DataService<Organization> {
     }
 
     const idx = this.organizations.findIndex(o => o.id === id)
-    if (idx) {
-      this.organizations.splice(idx, 1)
+    if (idx < 0) {
+      throw new Error('Profile not found')
     }
+
+    this.organizations.splice(idx, 1)
   }
 
   private createOrganizations () {

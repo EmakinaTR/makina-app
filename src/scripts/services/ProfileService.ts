@@ -20,6 +20,10 @@ class ProfileService implements DataService<Profile> {
   }
 
   public getById (id: number): Profile {
+    if (id < 0) {
+      throw new Error('id must be bigger than zero')
+    }
+
     const profile = this.profiles.find(p => p.id === id)
     if (!profile) {
       throw new Error('Profile not found')
@@ -41,6 +45,10 @@ class ProfileService implements DataService<Profile> {
 
   public update (profile: Profile): Profile {
     const idx = this.profiles.findIndex(p => p.id === profile.id)
+    if (idx < 0) {
+      throw new Error('Profile not found')
+    }
+
     profile.updatedAt = new Date()
     this.profiles[idx] = profile
     return profile
@@ -52,7 +60,7 @@ class ProfileService implements DataService<Profile> {
     }
 
     const idx = this.profiles.findIndex(p => p.id === id)
-    if (idx) {
+    if (idx >= 0) {
       this.profiles.splice(idx, 1)
     }
   }

@@ -1,47 +1,63 @@
 import * as faker from 'faker'
 import { Place } from '../models/Place'
 import { Organization } from '../models/Organization'
+import { DataService } from './DataService'
 
 /**
  * Organization Service with mock data from faker
  * @class
  */
-class OrganizationService {
-  private organizations : Organization []
+class OrganizationService implements DataService<Organization> {
+  private organizations: Organization[]
 
   constructor () {
     this.organizations = []
-    this.generateOrganizations()
+    this.createOrganizations()
   }
 
-  public getOrganizationById (id:number): Organization | undefined {
-    return this.organizations.find(o => o.id === id)
-  }
-
-  public getOrganizations (): Organization[] {
+  public getAll (): Organization[] {
     return this.organizations
   }
 
-  public addOrganization (organization : Organization) : Organization {
+  public getById (id: number): Organization {
+    const organization = this.organizations.find(o => o.id === id)
+    if (!organization) {
+      throw new Error('Organization not found')
+    }
+    return organization
+  }
+
+  public getBy (skip: number, take: number): Organization[] {
+    if (skip < 0 || take < 0) {
+      throw new Error('values must be bigger than zero.')
+    }
+    return this.organizations.slice(skip, take)
+  }
+
+  public create (organization: Organization): Organization {
     this.organizations.push(organization)
     return organization
   }
 
-  public updateOrganization (organization: Organization): Organization {
+  public update (organization: Organization): Organization {
     const idx = this.organizations.findIndex(p => p.id === organization.id)
     organization.updatedAt = new Date()
     this.organizations[idx] = organization
     return organization
   }
 
-  public deleteOrganizationById (id:number) {
+  public deleteById (id: number) {
+    if (id < 0) {
+      throw new Error('id must be bigger than zero')
+    }
+
     const idx = this.organizations.findIndex(o => o.id === id)
     if (idx) {
       this.organizations.splice(idx, 1)
     }
   }
 
-  private generateOrganizations () {
+  private createOrganizations () {
     let organization: Organization
     for (let i = 0; i < 50; i++) {
       organization = new Organization()
@@ -52,7 +68,7 @@ class OrganizationService {
       organization.placeId = i
       organization.place = new Place()
       organization.place.name = faker.address.city()
-      this.organizations.push(organization)
+      this.create(organization)
     }
   }
 }

@@ -52,7 +52,7 @@ class OrganizationService implements DataService<Organization> {
 
   public deleteById (id: number) {
     if (id < 0) {
-      throw new Error('id(${id}) must be bigger than zero')
+      throw new Error(`id(${id}) must be bigger than zero`)
     }
 
     const idx = this.organizations.findIndex(o => o.id === id)

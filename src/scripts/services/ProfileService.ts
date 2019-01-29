@@ -21,7 +21,7 @@ class ProfileService implements DataService<Profile> {
 
   public getById (id: number): Profile {
     if (id < 0) {
-      throw new Error('id(${id}) must be bigger than zero')
+      throw new Error(`id(${id}) must be bigger than zero`)
     }
 
     const profile = this.profiles.find(p => p.id === id)
@@ -33,7 +33,7 @@ class ProfileService implements DataService<Profile> {
 
   public getBy (skip: number, take: number): Profile[] {
     if (skip < 0 || take < 0) {
-      throw new Error('skip(${skip}) and take(${take}) must be bigger than zero.')
+      throw new Error(`skip(${skip}) and take(${take}) must be bigger than zero.`)
     }
     return this.profiles.slice(skip, take)
   }
@@ -56,7 +56,7 @@ class ProfileService implements DataService<Profile> {
 
   public deleteById (id: number) {
     if (id < 0) {
-      throw new Error('id(${id}) must be bigger than zero')
+      throw new Error(`id(${id}) must be bigger than zero`)
     }
 
     const idx = this.profiles.findIndex(p => p.id === id)

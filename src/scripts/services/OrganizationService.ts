@@ -29,7 +29,7 @@ class OrganizationService implements DataService<Organization> {
 
   public getBy (skip: number, take: number): Organization[] {
     if (skip < 0 || take < 0) {
-      throw new Error('values must be bigger than zero.')
+      throw new Error(`skip(${skip}) and take(${take}) must be bigger than zero.`)
     }
     return this.organizations.slice(skip, take)
   }

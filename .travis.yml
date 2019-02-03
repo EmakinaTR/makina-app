@@ -16,24 +16,16 @@ script:
   # Coverage
   - npm install coveralls --no-save
   - coveralls < ./coverage/lcov.info
-  # Deploy
-  - |
-    if [[ $TRAVIS_PULL_REQUEST == "false" && ($TRAVIS_BRANCH == "master" || $TRAVIS_BRANCH == "develop") ]]; then
-      VERSION_TYPE=patch && [[ $TRAVIS_BRANCH == "master" ]] && VERSION_TYPE=minor
-      echo $VERSION_TYPE
-      VERSION=`npm version $VERSION_TYPE -m $'Release v%s\n\n[skip ci]'`
-      echo $VERSION
-      DOCKER_TAG=develop && [[ $TRAVIS_BRANCH == "master" ]] && DOCKER_TAG=latest
-      echo $DOCKER_TAG
-      echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      docker pull $DOCKER_IMAGE:$DOCKER_TAG
-      docker build -t $DOCKER_IMAGE:$VERSION -t $DOCKER_IMAGE:$DOCKER_TAG --cache-from $DOCKER_IMAGE:$DOCKER_TAG .
-      docker push $DOCKER_IMAGE:$VERSION
-      docker push $DOCKER_IMAGE:$DOCKER_TAG
-      git remote rm origin
-      git remote add origin https://${GITHUB_ACCESS_TOKEN}@github.com/EmakinaTR/makina-app.git
-      git push origin HEAD:$TRAVIS_BRANCH
-      git push origin --tags
-    else
-      echo "Skipping deploy for $TRAVIS_BRANCH."
-    fi
+deploy:
+  provider: script
+  script:
+    - VERSION=`node -p -e "require('./package.json').version"`
+    - DOCKER_TAG=develop && [[ $TRAVIS_BRANCH == "master" ]] && DOCKER_TAG=latest
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker pull $DOCKER_IMAGE:$DOCKER_TAG
+    - docker build -t $DOCKER_IMAGE:$VERSION -t $DOCKER_IMAGE:$DOCKER_TAG --cache-from $DOCKER_IMAGE:$DOCKER_TAG .
+    - docker push $DOCKER_IMAGE:$VERSION
+    - docker push $DOCKER_IMAGE:$DOCKER_TAG
+  on:
+    all_branches: true
+    condition: $TRAVIS_BRANCH =~ ^develop|master$

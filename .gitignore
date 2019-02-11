@@ -152,3 +152,5 @@ $RECYCLE.BIN/
 
 package-lock.json
 yarn.lock
+
+.dist

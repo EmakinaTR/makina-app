@@ -69,7 +69,7 @@ class OrganizationService implements DataService<Organization> {
       organization = new Organization()
       organization.id = i
       organization.name = faker.name.findName()
-      organization.address = faker.address.country()
+      organization.address = faker.address.streetAddress()
       organization.phone = faker.phone.phoneNumber()
       organization.placeId = i
       organization.place = new Place()

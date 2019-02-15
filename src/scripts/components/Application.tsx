@@ -5,6 +5,7 @@ import { Navigation } from './layout'
 import { Home } from './Home'
 import { ProfileList } from './profile'
 import { OrganizationList } from './organization'
+import { JobOpeningList } from './job'
 
 export default function Application () {
   const [ drawerOpen, setDrawerOpen ] = React.useState(true)
@@ -114,6 +115,7 @@ export default function Application () {
             <Route exact path='/' component={Home} />
             <Route path='/profiles' component={ProfileList} />
             <Route path='/organizations' component={OrganizationList} />
+            <Route path='/jobopenings' component={JobOpeningList} />
           </Layout.Content>
         </Layout>
       </Layout>

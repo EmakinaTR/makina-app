@@ -1,17 +1,18 @@
-import React from 'react'
-import { Button, Card, Icon, Input, Radio } from 'antd'
-import { FormModal } from '../modal'
+import * as React from 'react'
+import { Button, Card, Icon, Input, Select } from 'antd'
+import { FormModal } from '../../modal'
 import { JobOpeningForm } from './JobOpeningForm'
 import { JobOpeningMeta } from './JobOpeningMeta'
-import { JobOpeningService } from '../../services'
-import { JobOpeningState } from '../../models'
+import { JobOpeningService } from '../../../services'
+import { JobOpeningState } from '../../../models'
 
 const Search = Input.Search
+const Option = Select.Option
 
 export class JobOpeningList extends React.Component {
   state = {
     visible: false,
-    dataSource: JobOpeningService.getAll()
+    dataSource: JobOpeningService.getBy(0, 5)
   }
 
   showModal = () => {
@@ -22,6 +23,10 @@ export class JobOpeningList extends React.Component {
 
   fetchPreviousOpenings = () => {
     console.log('fetchPreviousOpenings clicked')
+  }
+
+  handleChange = () => {
+    console.log('handleChange')
   }
 
   createCardList = () => {
@@ -43,20 +48,24 @@ export class JobOpeningList extends React.Component {
     })
   }
 
-  createStateRadioList = () => {
+  createJobOpeningStateOptions = () => {
     let keys = Object.keys(JobOpeningState).filter((key: any) => isNaN(key))
+    keys.unshift('All States')
     return keys.map(key => {
       return (
-        <Radio.Button value={key} key={key}>{key}</Radio.Button>
+        <Option value={key}>{key}</Option>
       )
     })
   }
 
-  createStateRadioGroup = () => {
+  createJobOpeningStateSelect = () => {
     return (
-      <Radio.Group defaultValue='a' buttonStyle='solid'>
-        {this.createStateRadioList()}
-      </Radio.Group>
+      <Select
+        defaultValue='All States'
+        className='width-200 margin-r-8'
+        onChange={this.handleChange}>
+        {this.createJobOpeningStateOptions()}
+      </Select>
     )
   }
 
@@ -64,14 +73,14 @@ export class JobOpeningList extends React.Component {
     return (
       <div>
         <Button type='primary' onClick={this.showModal}>Create</Button>
-        <Button onClick={this.fetchPreviousOpenings}>List Previous Openings</Button>
+        {this.createJobOpeningStateSelect()}
         <Search
           className='width-300 margin-r-8'
-          placeholder='Job title'
+          placeholder='Search any keyword'
           onSearch={value => console.log(value)}
           enterButton
         />
-        {this.createStateRadioGroup()}
+        <Button onClick={this.fetchPreviousOpenings} className='margin-r-8'>List Previous Openings</Button>
       </div>
     )
   }
@@ -79,7 +88,7 @@ export class JobOpeningList extends React.Component {
   render () {
     return (
       <div>
-        <h2>Job Openings</h2>
+        <h2>Openings</h2>
         {this.createHeader()}
         <div>
           {this.createCardList()}

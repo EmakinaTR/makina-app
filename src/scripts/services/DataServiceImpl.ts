@@ -5,6 +5,7 @@ import { DataService } from './DataService' // eslint-disable-line no-unused-var
  * @class
  */
 export abstract class DataServiceImpl<BaseEntry> implements DataService<BaseEntry> {
+  protected itemCount = 50
   private items: BaseEntry[]
 
   constructor () {
@@ -12,7 +13,13 @@ export abstract class DataServiceImpl<BaseEntry> implements DataService<BaseEntr
     this.createItems()
   }
 
-  protected abstract createItems (): void
+  abstract createItem (): BaseEntry
+
+  private createItems () {
+    for (let i = 0; i < this.itemCount; i++) {
+      this.create(this.createItem())
+    }
+  }
 
   public getAll (): BaseEntry[] {
     return this.items

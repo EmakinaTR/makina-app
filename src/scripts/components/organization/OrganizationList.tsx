@@ -33,22 +33,32 @@ export class OrganizationList extends React.Component {
       )
     }]
   }
+
   add = () => {
     console.log('add clicked')
   }
+
   edit = () => {
     console.log('edit clicked')
   }
+
   delete = () => {
     console.log('delete clicked')
   }
+
+  showModal = () => {
+    this.setState({
+      visible: true
+    })
+  }
+
   render () {
     return (
       <div>
         <h2>Organizations</h2>
         <div>
           <div className='table-operations'>
-            <Button onClick={this.add}>Add</Button>
+            <Button type='primary' onClick={this.showModal}>Create</Button>
           </div>
           <Table dataSource={this.state.dataSource} columns={this.state.columns} pagination={{ pageSize: 5 }} />
         </div>

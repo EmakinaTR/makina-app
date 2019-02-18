@@ -17,6 +17,7 @@ script:
   - npm install coveralls --no-save
   - coveralls < ./coverage/lcov.info
 deploy:
+  skip_cleanup: true
   provider: script
   script: bash .travis-deploy.sh
   on:

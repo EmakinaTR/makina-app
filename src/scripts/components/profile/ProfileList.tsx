@@ -20,14 +20,14 @@ export const ProfileList: React.FunctionComponent<any> = (props: any) => {
       title: 'First Name',
       dataIndex: 'firstName',
       key: 'firstName',
-      sorter: (a: any, b: any) => a.firstName!.localeCompare(b.firstName!),
+      sorter: (a, b) => a.firstName!.localeCompare(b.firstName!),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Last Name',
       dataIndex: 'lastName',
       key: 'lastName',
-      sorter: (a: any, b: any) => a.lastName!.localeCompare(b.lastName!),
+      sorter: (a, b) => a.lastName!.localeCompare(b.lastName!),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -96,7 +96,7 @@ export const ProfileList: React.FunctionComponent<any> = (props: any) => {
   return (
     <div>
       <div className='table-operations'>
-        <Button htmlType='button' onClick={handleNewProfile}>New Profile</Button>
+        <Button onClick={handleNewProfile}>New Profile</Button>
       </div>
       <Table<Profile> {...datas} rowKey='id' />
     </div>

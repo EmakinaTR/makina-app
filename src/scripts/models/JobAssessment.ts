@@ -1,5 +1,6 @@
 import { BaseEntry } from './BaseEntry'
 
 export class JobAssessment extends BaseEntry {
-  // TODO
+  title: string | null = null
+  content: string | null = null
 }

@@ -4,6 +4,12 @@ import { JobCandidateService } from '../../../services'
 
 // @semih: "başvuru tarihine göre sıralanmış, status'e ya da position'a göre gruplanmış / gruplanabilir bir liste güzel olur"
 
+/*
+ * TODO
+ * - Assign assessment
+ * - Review assessment
+ */
+
 const Option = Select.Option
 const Search = Input.Search
 

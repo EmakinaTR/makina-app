@@ -29,13 +29,22 @@ export class JobOpeningList extends React.Component {
     console.log('handleChange')
   }
 
+  goToCandidates = (id: number) => {
+    console.log(`goToCandidates ${id}`)
+  }
+
   createCardList = () => {
     return this.state.dataSource.map((x: any) => {
       return (
         <Card
           key={x.id}
           className='job-openings-card width-300'
-          actions={[<Icon type='edit' />, <Icon type='delete' />, <Icon type='ellipsis' />]}
+          actions={[
+            <Icon type='team' onClick={() => this.goToCandidates(x.id)} />,
+            <Icon type='edit' />,
+            <Icon type='delete' />,
+            <Icon type='ellipsis' />
+          ]}
         >
           <JobOpeningMeta
             title={x.title}

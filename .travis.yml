@@ -9,13 +9,12 @@ cache:
 env:
   - DOCKER_IMAGE="emakinatr/makina-app"
 script:
-  # Build and test
   - npm run lint
   - npm run build
   - npm test
-  # Coverage
-  - npm install coveralls --no-save
-  - coveralls < ./coverage/lcov.info
+after_success:
+  - npm install codecov --no-save
+  - codecov
 deploy:
   skip_cleanup: true
   provider: script
